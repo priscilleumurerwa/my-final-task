@@ -1,6 +1,6 @@
 class CreateFamilies < ActiveRecord::Migration[6.0]
   def change
-    create_table :families do |t|
+    create_table :familles do |t|
       t.integer :category
 
       t.timestamps

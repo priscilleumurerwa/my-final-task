@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_100342) do
+ActiveRecord::Schema.define(version: 2019_11_29_195159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,26 @@ ActiveRecord::Schema.define(version: 2019_11_29_100342) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "families", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "couple_id", null: false
+    t.index ["couple_id"], name: "index_comments_on_couple_id"
+  end
+
+  create_table "couples", force: :cascade do |t|
+    t.integer "category"
+    t.bigint "groom_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["groom_id"], name: "index_couples_on_groom_id"
+  end
+
+  create_table "familles", force: :cascade do |t|
     t.integer "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "groom_id", null: false
-    t.index ["groom_id"], name: "index_families_on_groom_id"
+    t.index ["groom_id"], name: "index_familles_on_groom_id"
   end
 
   create_table "grooms", force: :cascade do |t|
@@ -53,6 +67,8 @@ ActiveRecord::Schema.define(version: 2019_11_29_100342) do
     t.index ["bride_id"], name: "index_grooms_on_bride_id"
   end
 
-  add_foreign_key "families", "grooms"
+  add_foreign_key "comments", "couples"
+  add_foreign_key "couples", "grooms"
+  add_foreign_key "familles", "grooms"
   add_foreign_key "grooms", "brides"
 end
