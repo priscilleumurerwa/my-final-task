@@ -69,6 +69,6 @@ class GroomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def groom_params
-      params.require(:groom).permit(:name, :email, :birth_date, :sex, :country, :district, :sector, :cells, :phone_number)
+      params.require(:groom).permit(:name, :email, :birth_date, :sex, :country, :district, :sector, :cells, :phone_number, :bride_id)
     end
 end

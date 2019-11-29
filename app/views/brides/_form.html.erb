@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :sex %>
-    <%= form.text_field :sex %>
+    <%= form.select(:sex, options_for_select([[''] ,['male','male'],['female','female']])) %>
   </div>
 
   <div class="field">
